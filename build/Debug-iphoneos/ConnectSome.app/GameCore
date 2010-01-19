@@ -1,0 +1,13 @@
+GameCore is the core of the Connect Some game.  In the absolute center is the n-In-A-Row game engine, written and developed
+by Keith Pomakis (www.pomakis.com).  You should not have to touch this code, as there is a CSGameCore wrapper around it.  You
+should be working with that instead.
+
+CSGameCore is the actual object you will be working with, designed to abstract the game internals and make the function calls
+more Objective-C friendly.
+
+As of the current date, the GameCore will only allow one instance of a Connect Some game at one time.
+
+
+Whereas the internal game workings are contained within the CSGameCore object, all the Connect Some game's storage is 
+accessable within the CSSettingsController.  This object exposes methods to set or read important data as well as a few methods
+designed to remove a layer of obfuscation around the values for /some/ keys and allow for easier user workability.

@@ -1,0 +1,48 @@
+The CSGameBoard is a collection of views that come together to create the playing area of the Connect Some game.  Because of its nature, the
+best way to add the CSGameBoard to your application is to simply do something like the following:
+
+CSGameBoard *gameBoard = [[CSGameBoard alloc] initWithFrame:desiredGameBoardFrame autoCreateGrid:YES];
+
+All the internals will be set up by the game board itself.  Specifically, the design structure of the CSGameBoard is as follows
+
+--CSGameBoard
+	--CSGBColumnsView
+		--Column 
+			--Checker
+	--GameBoard
+
+
+	
+The point of the CSGameBoard view itself is to act as a container for the two most important subviews, the CSGBColumnsView and GameBoard 
+while providing a simple access point for attaching the game board to your project.  The CSGameBoard also exposes an outlet to clear the board.  
+
+Lastly, the CSGameBoard is responsible for the UIResponder methods and determining whether a piece can be placed. Specifically, a piece can not 
+be placed while another piece is currently being dropped.
+
+
+
+--The first subview we will discuss is the most visible component of the game board.  The GameBoard itself.  The GameBoard is exactly as it 
+appears, a yellow grid with spaces to contain for the game pieces.  As things stand, the GameBoard, while being the most visible component of 
+the actual game board, is the least important part.  The only thing the GameBoard object does is masks off the playing area, insetting the 
+visible game board by a preset amount.
+
+
+
+--The perhaps unsurprisingly more important subview of the CSGameBoard is the CSGBColumnsView.  The CSGBColumnsView is responsible for 
+maintaining the actual array of game columns.  This means telling the coluns to add a piece, or to remove the pieces from the column.
+
+
+
+----Column, as the name implies represents one in game column. The column is responsible for adding pieces and animating their drop and 
+removal sequences.  Column contains two piece removal modes, depending on how you want to proceed.  By default, it fake removes the pieces from 
+the game board.  That is, the CSGBColumnsView actually lowers, to give the impression of the game pieces falling from the bottom of the game 
+area.  The reason for this is performance.  Older devices can not handle the animation of all the pieces falling separetely without converting 
+the animation to OpenGL ES.  I wanted to avoid that for this project.  Asof this time, you may opt for the default method, or if you change a 
+flag, animate the piece removal piece by piece.  The latter method removes the piece from the board as soon as it has traveled below the game 
+board. This is to help the animation process, as it is useless to continue animating an object that isn't on the screen.
+
+
+----Checker is the actual game piece.  There are two choices here, light and dark.  Light is the traditional red checker while dark is a 
+blue checker.  Experiments with the traditional black checker were unappealing as the checker color was too dark.  It just didn't look good.
+However, since the Checker is, at its base, a UIImageView, you may have any checker image you want. Just set the Checker's image property to 
+whatever you want your checker to be.

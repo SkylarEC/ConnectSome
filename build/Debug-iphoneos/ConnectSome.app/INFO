@@ -1,0 +1,5 @@
+ConnectSome, is a front end interface for a game based off of the popular Hasbro game where you must outwit your opponent by placing four of your color checkers in a straight line before your opponent does.
+
+The algorithm ConnectSome uses for the computer AI was designed by Keith Pomakis at http://www.pomakis.com/.  This algorithm allows for play with a variety of game board sizes and variable number of checkers required to be connected. 
+
+The source code for ConnectSome is available for download at http://www.skylarcantu.com/
